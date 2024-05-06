@@ -10,32 +10,34 @@ const rl = readline.createInterface({
 const generatePattern = (n: number): void => {
     const sequence: number[] = [];
 
-    // Loop through to create the full pattern
+    // Loop through to create a symmetric pattern of numbers
     for (let i = 1; i <= n; i++) {
-        // Create the symmetric sequence for this row
         const subSequence: number[] = [];
 
-        // Adding numbers from 1 to i-1 (left side)
+        // Build the left section of the pattern
         for (let j = 1; j < i; j++) {
             subSequence.push(j);
         }
 
-        // Add the central number `i`
+        // Add the center value
         subSequence.push(i);
 
-        // Append the mirrored sequence (right side), excluding the last item
+        // Build the right section of the pattern, mirroring the left
         for (let j = i - 1; j >= 1; j--) {
             subSequence.push(j);
         }
 
+        // Append the symmetrical subSequence to the main sequence
         sequence.push(...subSequence);
     }
 
-    // Join the sequence with a space and insert newlines after numbers greater than 5
+    // Prepare the output string with the desired formatting
     let output = "";
-    for (const num of sequence) {
-        output += ` ${num}`;
-        if (num > 5) {
+    for (let i = 0; i < sequence.length; i++) {
+        output += ` ${sequence[i]}`;
+        
+        // Insert a newline after numbers greater than 5
+        if (sequence[i] > 5 && i < sequence.length - 1) {
             output += "\n";
         }
     }
@@ -53,5 +55,5 @@ rl.question("Enter a positive integer: ", (answer) => {
         generatePattern(n);
     }
 
-    rl.close();  // Close the readline interface
+    rl.close(); // Close the readline interface
 });
