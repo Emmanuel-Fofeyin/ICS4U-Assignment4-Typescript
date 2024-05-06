@@ -6,7 +6,6 @@
 * @since   2024-05-06
 */
 
-
 import * as readline from 'readline';
 
 // Create a readline interface to read input from the user
@@ -15,35 +14,26 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-// Function to generate the pattern as specified
+// Function to generate the pattern
 const generatePattern = (n: number): void => {
-    const sequence: string[] = [];
+    let sequence: number[] = [];
 
-    // Create the full sequence with symmetry around each central number
+    // Loop through to create the pattern
     for (let i = 1; i <= n; i++) {
-        const currentRow: number[] = [];
-
-        // Construct the symmetrical pattern for the current row
-        // Left part: from 1 to i-1
-        for (let j = 1; j < i; j++) {
-            currentRow.push(j);
-        }
-
-        // Middle part: the current i value
-        currentRow.push(i);
-
-        // Right part: from i-1 to 1 (reverse order)
-        for (let j = i - 1; j >= 1; j--) {
-            currentRow.push(j);
-        }
-
-        // Append current row to the main sequence, separated by a space
-        sequence.push(currentRow.map(num => ` ${num}`).join(''));
+        const previousSequence = [...sequence]; // Preserve the previous sequence
+        sequence = [...previousSequence, i, ...previousSequence.reverse()]; // Construct the new sequence
     }
 
-    // Print the final pattern with appropriate newlines
-    const output = sequence.join('\n');
-    console.log(output);
+    // Build the final output with the given structure
+    let output = "";
+    for (const num of sequence) {
+        output += ` ${num}`; // Add a space before each number
+        if (num > 5) {
+            output += "\n"; // Insert a newline after numbers greater than 5
+        }
+    }
+
+    console.log(output.trim()); // Print the final output
 };
 
 // Ask the user for a positive integer input
