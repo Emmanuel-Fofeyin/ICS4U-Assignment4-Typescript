@@ -1,52 +1,46 @@
-/*
-* This program runs with the Triangle class.
-*
-* @author  Emmanuel FN
-* @version 1.0
-* @since   2024-05-05
-*/
-
 import * as readline from 'readline';
 
+// Create a readline interface to read input from the user
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-function printPattern(n: number): void {
-    let numbers: number[] = [];
-    
-    // Build the pattern with 2n-1 numbers
+// Function to generate the pattern as specified
+const generatePattern = (n: number): void => {
+    const sequence = [];
+
+    // Loop through to create a symmetric pattern of numbers
     for (let i = 1; i <= n; i++) {
-        // Add all numbers from 1 to i
-        for (let j = 1; j <= i; j++) {
-            numbers.push(j);
+        const subSequence = [];
+        for (let j = 1; j < i; j++) {
+            subSequence.push(j);
         }
-        // Add all numbers from i-1 to 1
-        for (let j = i - 1; j >= 1; j--) {
-            numbers.push(j);
-        }
+        subSequence.push(i);  // Include the current "i" value
+        sequence.push(...subSequence.reverse(), ...subSequence.slice(1));
     }
 
-    // Print the pattern with the specified newline conditions
-    for (const num of numbers) {
+    // Join the sequence with a space and insert newlines after numbers greater than 5
+    let output = "";
+    for (const num of sequence) {
+        output += " " + num;
         if (num > 5) {
-            console.log(` ${num}`); // Newline after number greater than 5
-        } else {
-            process.stdout.write(` ${num}`); // Space before each integer
+            output += "\n";
         }
     }
-}
 
-rl.question('Enter a positive integer: ', (answer: string) => {
-    const n = parseInt(answer, 10);
+    console.log(output.trim());
+};
+
+// Ask the user for an integer input
+rl.question("Enter a positive integer: ", (answer) => {
+    const n = parseInt(answer);
 
     if (isNaN(n) || n < 1) {
-        console.error('Error: You must enter a positive integer.');
+        console.log("Error: Please enter a positive integer greater than 0.");
     } else {
-        printPattern(n);
+        generatePattern(n);
     }
 
-    console.log("\nDone"); // Print "done" at the end of the program
-    rl.close();
+    rl.close();  // Close the readline interface
 });
