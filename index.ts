@@ -6,6 +6,12 @@
 * @since   2024-05-06
 */
 
+/* readline is a module in Node.js designed for 
+reading input from a readable stream (like process.stdin), 
+usually to interact with users in a command-line interface 
+(CLI) or console-based application.
+*/ 
+
 import * as readline from 'readline';
 
 // Create a readline interface to read input from the user
