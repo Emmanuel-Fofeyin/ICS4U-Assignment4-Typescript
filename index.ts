@@ -8,44 +8,36 @@ const rl = readline.createInterface({
 
 // Function to generate the pattern as specified
 const generatePattern = (n: number): void => {
-    const sequence: number[] = [];
+    const sequence: string[] = [];
 
-    // Loop through to create a symmetric pattern of numbers
+    // Create the full sequence with symmetry around each central number
     for (let i = 1; i <= n; i++) {
-        const subSequence: number[] = [];
+        const currentRow: number[] = [];
 
-        // Build the left section of the pattern
+        // Construct the symmetrical pattern for the current row
+        // Left part: from 1 to i-1
         for (let j = 1; j < i; j++) {
-            subSequence.push(j);
+            currentRow.push(j);
         }
 
-        // Add the center value
-        subSequence.push(i);
+        // Middle part: the current i value
+        currentRow.push(i);
 
-        // Build the right section of the pattern, mirroring the left
+        // Right part: from i-1 to 1 (reverse order)
         for (let j = i - 1; j >= 1; j--) {
-            subSequence.push(j);
+            currentRow.push(j);
         }
 
-        // Append the symmetrical subSequence to the main sequence
-        sequence.push(...subSequence);
+        // Append current row to the main sequence, separated by a space
+        sequence.push(currentRow.map(num => ` ${num}`).join(''));
     }
 
-    // Prepare the output string with the desired formatting
-    let output = "";
-    for (let i = 0; i < sequence.length; i++) {
-        output += ` ${sequence[i]}`;
-        
-        // Insert a newline after numbers greater than 5
-        if (sequence[i] > 5 && i < sequence.length - 1) {
-            output += "\n";
-        }
-    }
-
-    console.log(output.trim());
+    // Print the final pattern with appropriate newlines
+    const output = sequence.join('\n');
+    console.log(output);
 };
 
-// Ask the user for an integer input
+// Ask the user for a positive integer input
 rl.question("Enter a positive integer: ", (answer) => {
     const n = parseInt(answer);
 
