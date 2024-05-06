@@ -47,7 +47,7 @@ const generatePattern = (n: number): void => {
 };
 
 // Ask the user for a positive integer input
-rl.question("Enter a positive integer: ", (answer) => {
+rl.question("Enter a positive integer: "); (answer) => {
     const n = parseInt(answer);
 
     if (isNaN(n) || n < 1) {
@@ -58,4 +58,4 @@ rl.question("Enter a positive integer: ", (answer) => {
 
     console.log("\nDone.")
     rl.close(); // Close the readline interface
-});
+}
