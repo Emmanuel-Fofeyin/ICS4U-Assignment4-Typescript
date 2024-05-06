@@ -12,6 +12,10 @@ usually to interact with users in a command-line interface
 (CLI) or console-based application.
 */ 
 
+/* This is were I got the IDEA.
+https://www.geeksforgeeks.org/node-js-readline-module/?ref=header_search
+*/
+
 import * as readline from 'readline';
 
 // Create a readline interface to read input from the user
