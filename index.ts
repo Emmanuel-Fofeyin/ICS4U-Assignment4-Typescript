@@ -46,5 +46,6 @@ rl.question("Enter a positive integer: ", (answer) => {
         generatePattern(n);
     }
 
+    console.log("\nDone.")
     rl.close(); // Close the readline interface
 });
