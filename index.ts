@@ -1,3 +1,12 @@
+/*
+* This program runs with the Triangle class.
+*
+* @author  Emmanuel FN
+* @version 1.0
+* @since   2024-05-06
+*/
+
+
 import * as readline from 'readline';
 
 // Create a readline interface to read input from the user
