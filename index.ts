@@ -8,22 +8,33 @@ const rl = readline.createInterface({
 
 // Function to generate the pattern as specified
 const generatePattern = (n: number): void => {
-    const sequence = [];
+    const sequence: number[] = [];
 
-    // Loop through to create a symmetric pattern of numbers
+    // Loop through to create the full pattern
     for (let i = 1; i <= n; i++) {
-        const subSequence = [];
+        // Create the symmetric sequence for this row
+        const subSequence: number[] = [];
+
+        // Adding numbers from 1 to i-1 (left side)
         for (let j = 1; j < i; j++) {
             subSequence.push(j);
         }
-        subSequence.push(i);  // Include the current "i" value
-        sequence.push(...subSequence.reverse(), ...subSequence.slice(1));
+
+        // Add the central number `i`
+        subSequence.push(i);
+
+        // Append the mirrored sequence (right side), excluding the last item
+        for (let j = i - 1; j >= 1; j--) {
+            subSequence.push(j);
+        }
+
+        sequence.push(...subSequence);
     }
 
     // Join the sequence with a space and insert newlines after numbers greater than 5
     let output = "";
     for (const num of sequence) {
-        output += " " + num;
+        output += ` ${num}`;
         if (num > 5) {
             output += "\n";
         }
