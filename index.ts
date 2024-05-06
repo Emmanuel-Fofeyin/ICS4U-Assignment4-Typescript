@@ -47,5 +47,6 @@ rl.question('Enter a positive integer: ', (answer: string) => {
         printPattern(n);
     }
 
+    console.log("\nDone"); // Print "done" at the end of the program
     rl.close();
 });
