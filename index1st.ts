@@ -6,14 +6,27 @@
 * @since   2024-05-06
 */
 
-import { createPrompt } from 'bun-promptx';
+/* readline is a module in Node.js designed for 
+reading input from a readable stream (like process.stdin), 
+usually to interact with users in a command-line interface 
+(CLI) or console-based application.
+*/ 
 
-// Create a prompt interface to read input from the user
-const prompt = createPrompt();
+/* This is were I got the IDEA.
+https://www.geeksforgeeks.org/node-js-readline-module/?ref=header_search
+*/
+
+import * as readline from 'readline';
+
+// Create a readline interface to read input from the user
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
 // Function to generate the pattern
-const generatePattern = (n) => {
-    let sequence = [];
+const generatePattern = (n: number): void => {
+    let sequence: number[] = [];
 
     // Loop through to create the pattern
     for (let i = 1; i <= n; i++) {
@@ -34,7 +47,7 @@ const generatePattern = (n) => {
 };
 
 // Ask the user for a positive integer input
-prompt('Enter a positive integer: ').then(answer => {
+rl.question("Enter a positive integer: ", (answer) => {
     const n = parseInt(answer);
 
     if (isNaN(n) || n < 1) {
@@ -43,5 +56,6 @@ prompt('Enter a positive integer: ').then(answer => {
         generatePattern(n);
     }
 
-    console.log("\nDone.");
+    console.log("\nDone.")
+    rl.close(); // Close the readline interface
 });
