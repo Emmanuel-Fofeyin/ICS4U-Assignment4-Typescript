@@ -12,8 +12,8 @@ import { createPrompt } from 'bun-promptx';
 const prompt = createPrompt();
 
 // Function to generate the pattern
-const generatePattern = (number: number) => {
-    let sequence: any[] = [];
+const generatePattern = (number) => {
+    let sequence = [];
 
     // Loop through to create the pattern
     for (let integer = 1; integer <= number; integer++) {
@@ -34,14 +34,14 @@ const generatePattern = (number: number) => {
 };
 
 // Ask the user for a positive integer input
-createPrompt('Enter a positive integer: '); public getPattern(answer: string) {
-        const number = parseInt(answer);
+createPrompt('Enter a positive integer: ').then(answer => {
+    const number = parseInt(answer);
 
-        if (isNaN(number) || number < 1) {
-            console.log("Error: Please enter a positive integer greater than 0.");
-        } else {
-            this.generatePattern(number);
-        }
-
-        console.log("\nDone.");
+    if (isNaN(number) || number < 1) {
+        console.log("Error: Please enter a positive integer greater than 0.");
+    } else {
+        generatePattern(number);
     }
+
+    console.log("\nDone.");
+});
