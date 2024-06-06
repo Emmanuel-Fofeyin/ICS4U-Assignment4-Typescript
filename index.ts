@@ -34,10 +34,7 @@ const generatePattern = (number: number) => {
 };
 
 // Ask the user for a positive integer input
-createPrompt('Enter a positive integer: ');
-
-class PatternGenerator {
-    public getPattern(answer: string) {
+createPrompt('Enter a positive integer: '); public getPattern(answer: string) {
         const number = parseInt(answer);
 
         if (isNaN(number) || number < 1) {
@@ -48,13 +45,3 @@ class PatternGenerator {
 
         console.log("\nDone.");
     }
-
-    private generatePattern(number: number) {
-        // Implementation of pattern generation
-    }
-}
-
-// Example usage:
-const generator = new PatternGenerator();
-generator.getPattern("5");
-
