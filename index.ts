@@ -9,7 +9,7 @@
 import { createPrompt } from 'bun-promptx';
 
 // Create a prompt interface to read input from the user
-const prompt = createPrompt();
+const userPrompt = createPrompt();
 
 // Function to generate the pattern
 const generatePattern = (number: number) => {
@@ -34,7 +34,7 @@ const generatePattern = (number: number) => {
 };
 
 // Ask the user for a positive integer input
-prompt('Enter a positive integer: ', (err: any, answer: string) => {
+userPrompt('Enter a positive integer: ', (err: any, answer: string) => {
     if (err) {
         console.error("Prompt failed", err);
         return;
