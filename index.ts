@@ -34,7 +34,7 @@ const generatePattern = (number) => {
 };
 
 // Ask the user for a positive integer input
-createPrompt('Enter a positive integer: ')(answer => {
+createPrompt('Enter a positive integer: ') function getAnswer(answer => {
     const number = parseInt(answer);
 
     if (isNaN(number) || number < 1) {
