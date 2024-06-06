@@ -16,7 +16,7 @@ const generatePattern = (number) => {
     let sequence = [];
 
     // Loop through to create the pattern
-    for (let integer = 1; integer <= n; integer++) {
+    for (let integer = 1; integer <= number; integer++) {
         const previousSequence = [...sequence]; // Preserve the previous sequence
         sequence = [...previousSequence, integer, ...previousSequence.reverse()]; // Construct the new sequence
     }
@@ -35,7 +35,7 @@ const generatePattern = (number) => {
 
 // Ask the user for a positive integer input
 createPrompt('Enter a positive integer: ').then(answer => {
-    const n = parseInt(answer);
+    const number = parseInt(answer);
 
     if (isNaN(number) || number < 1) {
         console.log("Error: Please enter a positive integer greater than 0.");
