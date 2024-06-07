@@ -1,7 +1,7 @@
 /*
  * This is the hourglass program
  *
- * @author  Emmanuel Fofeyin Vovk
+ * @author  Emmanuel Fofeyin 
  * @version 1.0
  * @since   2024-05-06
  */
