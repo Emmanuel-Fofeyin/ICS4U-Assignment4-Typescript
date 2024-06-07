@@ -9,11 +9,11 @@
 import { createPrompt } from 'bun-promptx';
 
 // Create a prompt interface to read input from the user
-const userPrompt = createPrompt();
+const prompt = createPrompt();
 
 // Function to generate the pattern
-const generatePattern = (number: number) => {
-    let sequence: any[] = [];
+const generatePattern = (number) => {
+    let sequence = [];
 
     // Loop through to create the pattern
     for (let integer = 1; integer <= number; integer++) {
@@ -34,19 +34,21 @@ const generatePattern = (number: number) => {
 };
 
 // Ask the user for a positive integer input
-userPrompt('Enter a positive integer: ', (err: any, answer: string) => {
-    if (err) {
-        console.error("Prompt failed", err);
-        return;
+async function getInput() {
+    try {
+        const answer = await prompt('Enter a positive integer:');
+        const number = parseInt(answer);
+
+        if (isNaN(number) || number < 1) {
+            console.log("Error: Please enter a positive integer greater than 0.");
+        } else {
+            generatePattern(number);
+        }
+
+        console.log("\nDone.");
+    } catch (error) {
+        console.error("Error occurred:", error);
     }
+}
 
-    const number = parseInt(answer);
-
-    if (isNaN(number) || number < 1) {
-        console.log("Error: Please enter a positive integer greater than 0.");
-        return;
-    }
-
-    generatePattern(number);
-    console.log("\nDone.");
-});
+getInput();
