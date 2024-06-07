@@ -1,47 +1,53 @@
 /*
-* This program runs with the Triangle class.
-*
-* @author  Emmanuel FN
-* @version 1.0
-* @since   2024-05-06
-*/
+ * This is the hourglass program
+ *
+ * @author  Emmanuel Fofeyin Vovk
+ * @version 1.0
+ * @since   2024-05-06
+ */
 
-import { createPrompt } from 'bun-promptx';
 
-// Create a prompt interface to read input from the user
-const prompt = createPrompt();
+import { createPrompt } from 'bun-promptx'
 
-// Function to generate the pattern
-const generatePattern = (number) => {
-    let sequence = [];
+const input = createPrompt("Input a number for the hourglass(min 1): ")
+const integer = parseInt(input.value || "-1")
 
-    // Loop through to create the pattern
-    for (let integer = 1; integer <= number; integer++) {
-        const previousSequence = [...sequence]; // Preserve the previous sequence
-        sequence = [...previousSequence, integer, ...previousSequence.reverse()]; // Construct the new sequence
+printHourglass(integer)
+
+function printHourglass(input: number): void {
+    if (input < 1) {
+        console.log("Error: Input must be at least 1.")
+        return
     }
 
-    // Build the final output with the given structure
-    let output = "";
-    for (const num of sequence) {
-        output += ` ${num}`; // Add a space before each number
-        if (num > 5) {
-            output += "\n"; // Insert a newline after numbers greater than 5
+    // Helper function to generate a string with a specific number of characters
+    function generateString(count: number): string {
+        let result = ""
+        for (let repeat = 0; repeat < count; repeat++) {
+            result += " "
         }
+        return result
     }
 
-    console.log(output.trim()); // Print the final output
-};
-
-// Ask the user for a positive integer input
-createPrompt('Enter a positive integer: ').then(answer => {
-    const number = parseInt(answer);
-
-    if (isNaN(number) || number < 1) {
-        console.log("Error: Please enter a positive integer greater than 0.");
-    } else {
-        generatePattern(number);
+    // Upper half of the hourglass
+    for (let repeat = 0; repeat < input; repeat++) {
+        const spaces = generateString(repeat)
+        let stars = ""
+        for (let loop = 0; loop < input - repeat; loop++) {
+            stars += "* "
+        }
+        console.log(spaces + stars); // Manually trim the trailing space
     }
 
-    console.log("\nDone.");
-});
+    // Lower half of the hourglass
+    for (let repeat = input - 1; repeat >= 0; repeat--) {
+        const spaces = generateString(repeat)
+        let stars = ""
+        for (let loop = 0; loop < input - repeat; loop++) {
+            stars += "* "
+        }
+        console.log(spaces + stars) // Manually trim the trailing space
+    }
+}
+
+console.log("\nDone")
