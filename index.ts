@@ -34,21 +34,14 @@ const generatePattern = (number) => {
 };
 
 // Ask the user for a positive integer input
-async function getInput() {
-    try {
-        const answer = await prompt('Enter a positive integer:');
-        const number = parseInt(answer);
+createPrompt('Enter a positive integer: ').then(answer => {
+    const number = parseInt(answer);
 
-        if (isNaN(number) || number < 1) {
-            console.log("Error: Please enter a positive integer greater than 0.");
-        } else {
-            generatePattern(number);
-        }
-
-        console.log("\nDone.");
-    } catch (error) {
-        console.error("Error occurred:", error);
+    if (isNaN(number) || number < 1) {
+        console.log("Error: Please enter a positive integer greater than 0.");
+    } else {
+        generatePattern(number);
     }
-}
 
-getInput();
+    console.log("\nDone.");
+});
